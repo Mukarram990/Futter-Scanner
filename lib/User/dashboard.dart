@@ -117,9 +117,7 @@ class _DashboardState extends State<Dashboard> {
         elevation: 2.0,
         child: DashDrawer(),
       ),
-      // body: const MyPDFList(),
-
-      //
+      body: const PDF(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex, //New
         onTap: _onItemTapped,
