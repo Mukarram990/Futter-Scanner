@@ -17,24 +17,24 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   String filepath = "";
-  String? Getpath() {
-    getFromGallery();
-    return filepath;
-  }
+  // String? Getpath() {
+  //   getFromGallery();
+  //   return filepath;
+  // }
 
-  getFromGallery() async {
-    XFile? pickedFile = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-    if (pickedFile != null) {
-      setState(() {
-        // imageFile = File(pickedFile.path);
-        filepath = pickedFile.path;
-      });
-    }
-  }
+  // getFromGallery() async {
+  //   XFile? pickedFile = await ImagePicker().pickImage(
+  //     source: ImageSource.gallery,
+  //     maxWidth: 1800,
+  //     maxHeight: 1800,
+  //   );
+  //   if (pickedFile != null) {
+  //     setState(() {
+  //       // imageFile = File(pickedFile.path);
+  //       filepath = pickedFile.path;
+  //     });
+  //   }
+  // }
 
   Future<Directory> copyLanguageFile() async {
     Directory languageFolder = await getApplicationSupportDirectory();
@@ -76,6 +76,7 @@ class _DashboardState extends State<Dashboard> {
                 onError: (error) => displayError(context, error));
           }, onError: (error) => displayError(context, error));
         });
+        setState(() {});
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -83,25 +84,25 @@ class _DashboardState extends State<Dashboard> {
           ),
         );
       } else if (_selectedIndex == 2) {
-        filepath = "";
-        FlutterGeniusScan.setLicenceKey(
-            '533c5006515e0400045c0f5439525a0e4a064a0559465e5c4c505813434c55421157050c565044685404040a515b05035a51');
-        copyLanguageFile().then((folder) {
-          FlutterGeniusScan.scanWithConfiguration({
-            'source': 'image',
-            'sourceImageUrl': Getpath(),
-            'multiPage': true,
-            'ocrConfiguration': {
-              'languages': ['eng'],
-              'languagesDirectoryUrl': folder.path
-            }
-          }).then((result) {
-            String documentUrl = result['multiPageDocumentUrl'];
-            OpenFile.open(documentUrl.replaceAll("file://", '')).then(
-                (result) => debugPrint(result.message),
-                onError: (error) => displayError(context, error));
-          }, onError: (error) => displayError(context, error));
-        });
+        // filepath = "";
+        // FlutterGeniusScan.setLicenceKey(
+        //     '533c5006515e0400045c0f5439525a0e4a064a0559465e5c4c505813434c55421157050c565044685404040a515b05035a51');
+        // copyLanguageFile().then((folder) {
+        //   FlutterGeniusScan.scanWithConfiguration({
+        //     'source': 'image',
+        //     'sourceImageUrl': Getpath(),
+        //     'multiPage': true,
+        //     'ocrConfiguration': {
+        //       'languages': ['eng'],
+        //       'languagesDirectoryUrl': folder.path
+        //     }
+        //   }).then((result) {
+        //     String documentUrl = result['multiPageDocumentUrl'];
+        //     OpenFile.open(documentUrl.replaceAll("file://", '')).then(
+        //         (result) => debugPrint(result.message),
+        //         onError: (error) => displayError(context, error));
+        //   }, onError: (error) => displayError(context, error));
+        // });
       }
     });
   }
@@ -138,8 +139,11 @@ class _DashboardState extends State<Dashboard> {
             ),
           ),
           BottomNavigationBarItem(
-            label: "Image To PDF",
-            icon: Icon(Icons.image),
+            label: "",
+            icon: Icon(
+              Icons.image,
+              color: Colors.transparent,
+            ),
           ),
         ],
       ),

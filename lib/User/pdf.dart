@@ -1,6 +1,9 @@
 import 'dart:io' as io;
 import 'package:flutter/material.dart';
+import 'package:flutterscanner/constants.dart';
+import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as p;
 
 class PDF extends StatefulWidget {
   const PDF({Key? key}) : super(key: key);
@@ -24,6 +27,10 @@ class _PDFState extends State<PDF> {
     });
   }
 
+  void openFile(String file) {
+    OpenFile.open(file);
+  }
+
   @override
   void initState() {
     getFiles();
@@ -41,7 +48,20 @@ class _PDFState extends State<PDF> {
             child: ListView.builder(
                 itemCount: file.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Text(file[index].toString());
+                  String name = p.basename(file[index].toString());
+                  return Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Card(
+                        color: Kmaincolor,
+                        shadowColor: Kmaincolor,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            name.toString(),
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        )),
+                  );
                 }),
           )
         ],

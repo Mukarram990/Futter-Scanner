@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_genius_scan/flutter_genius_scan.dart';
+import 'package:flutterscanner/register.dart';
 import 'drawer.dart';
 import 'firebase_options.dart';
 import 'splashscreen.dart';
@@ -107,25 +108,25 @@ class _HomePageState extends State<HomePage> {
           ),
         );
       } else if (_selectedIndex == 2) {
-        filepath = "";
-        FlutterGeniusScan.setLicenceKey(
-            '533c5006515e0400045c0f5439525a0e4a064a0559465e5c4c505813434c55421157050c565044685404040a515b05035a51');
-        copyLanguageFile().then((folder) {
-          FlutterGeniusScan.scanWithConfiguration({
-            'source': 'image',
-            'sourceImageUrl': Getpath(),
-            'multiPage': true,
-            'ocrConfiguration': {
-              'languages': ['eng'],
-              'languagesDirectoryUrl': folder.path
-            }
-          }).then((result) {
-            String documentUrl = result['multiPageDocumentUrl'];
-            OpenFile.open(documentUrl.replaceAll("file://", '')).then(
-                (result) => debugPrint(result.message),
-                onError: (error) => displayError(context, error));
-          }, onError: (error) => displayError(context, error));
-        });
+        // filepath = "";
+        // FlutterGeniusScan.setLicenceKey(
+        //     '533c5006515e0400045c0f5439525a0e4a064a0559465e5c4c505813434c55421157050c565044685404040a515b05035a51');
+        // copyLanguageFile().then((folder) {
+        //   FlutterGeniusScan.scanWithConfiguration({
+        //     'source': 'image',
+        //     'sourceImageUrl': Getpath(),
+        //     'multiPage': true,
+        //     'ocrConfiguration': {
+        //       'languages': ['eng'],
+        //       'languagesDirectoryUrl': folder.path
+        //     }
+        //   }).then((result) {
+        //     String documentUrl = result['multiPageDocumentUrl'];
+        //     OpenFile.open(documentUrl.replaceAll("file://", '')).then(
+        //         (result) => debugPrint(result.message),
+        //         onError: (error) => displayError(context, error));
+        //   }, onError: (error) => displayError(context, error));
+        // });
       }
     });
   }
@@ -140,6 +141,46 @@ class _HomePageState extends State<HomePage> {
       drawer: const Drawer(
         elevation: 2.0,
         child: MainDrawer(),
+      ),
+      body: Center(
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          const Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Text(
+              "Welcome To Flutter Scanner",
+              style: TextStyle(
+                  color: Kmaincolor, fontSize: 25, fontWeight: FontWeight.bold),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Text(
+              "Not yet Register? Click below to register !",
+              style: TextStyle(
+                  color: Kmaincolor, fontSize: 15, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => const Register())));
+                },
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    "Register",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                    ),
+                  ),
+                ),
+              ))
+        ]),
       ),
       //
       bottomNavigationBar: BottomNavigationBar(
@@ -162,8 +203,11 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           BottomNavigationBarItem(
-            label: "Image To PDF",
-            icon: Icon(Icons.image),
+            label: "",
+            icon: Icon(
+              Icons.image,
+              color: Colors.transparent,
+            ),
           ),
         ],
       ),
