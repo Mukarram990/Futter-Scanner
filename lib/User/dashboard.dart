@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_genius_scan/flutter_genius_scan.dart';
 import 'package:flutterscanner/User/dashdrawer.dart';
 import 'package:flutterscanner/User/pdf.dart';
+import 'package:flutterscanner/constants.dart';
 import 'dart:io';
 import 'package:open_file/open_file.dart';
 import 'package:flutter/services.dart';
@@ -118,7 +119,23 @@ class _DashboardState extends State<Dashboard> {
         elevation: 2.0,
         child: DashDrawer(),
       ),
-      body: const PDF(),
+      body: Column(
+        children: const [
+          Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Text(
+              "Recent History",
+              style: TextStyle(
+                color: Kmaincolor,
+                fontSize: 25,
+              ),
+            ),
+          ),
+          Center(
+            child: PDF(),
+          )
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex, //New
         onTap: _onItemTapped,

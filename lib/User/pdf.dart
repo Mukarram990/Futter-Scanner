@@ -51,16 +51,18 @@ class _PDFState extends State<PDF> {
                   String name = p.basename(file[index].toString());
                   return Padding(
                     padding: const EdgeInsets.all(15.0),
-                    child: Card(
-                        color: Kmaincolor,
-                        shadowColor: Kmaincolor,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Text(
-                            name.toString(),
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        )),
+                    child: Expanded(
+                      child: Card(
+                          color: Kmaincolor,
+                          shadowColor: Kmaincolor,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              name.toString(),
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          )),
+                    ),
                   );
                 }),
           )

@@ -103,7 +103,7 @@ class MainDrawer extends StatelessWidget {
             height: 100,
           ),
           const Text(
-            "Version: V.1.0",
+            "Version: V.2.0",
             style: TextStyle(
                 fontSize: 12, fontWeight: FontWeight.bold, color: Kmaincolor),
           ),
